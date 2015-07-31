@@ -1,0 +1,70 @@
+<?php
+/**
+ * @file
+ * Main file for the Extra Site Infrmation module.
+ */
+
+/**
+ * Implements hook_form_formid_alter().
+ */
+
+function siteinfo_form_system_site_information_settings_alter(&$form, &$form_state) {
+  
+    $de_val = (variable_get('siteapikey')!==''?variable_get('siteapikey'):'No API Key yet');
+    $form['siteapikey'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Site API Key'),
+      '#default_value' => $de_val,
+    );
+     $form['#submit'][] = 'siteinfo_submit';
+     $form['actions']['submit']['#value'] = 'Update Configuration';
+ 
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function siteinfo_menu() { 
+
+  $items['page_json/%/%node'] = array(
+    'page callback' => 'siteinfo_endpoint',
+    'page arguments' => array(1,2),
+    'access arguments' => array('access content'),
+  );
+  return $items;
+
+}
+/**
+ * Menu callback for the node JSON endpoint.
+ *
+ *@param $apikey
+ *   Api Key variable
+ * @param $node
+ *   A node object.
+ * 
+ * @return
+ *   Returns node as JSON.
+ */
+function siteinfo_endpoint($apikey, $node) {
+   
+  
+  if(variable_get('siteapikey') == $apikey && $node->type =='page')
+    {
+       drupal_json_output($node);
+    }
+ 
+  else
+    {
+      echo "Access Denied";
+    }
+
+}
+/**
+*Submit handler
+*
+*/
+function siteinfo_submit($form, &$form_state) {
+  
+    drupal_set_message(t("Site API Key has been saved "));
+}
