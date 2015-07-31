@@ -1,0 +1,11 @@
+<?php
+/**
+ * @file
+ * install/unistall file for Extra Site Information module
+ */
+/**
+ * Implements hook_unistall().
+ */
+function siteinfo_uninstall() {
+  variable_del('siteapikey');
+}
