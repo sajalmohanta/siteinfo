@@ -1,0 +1,6 @@
+name = Extra Site Information
+description = Alter the existing Drupal "Site Information" form.
+package = Site Information
+version = "7.x-2.0"
+core = "7.x"
+project = "siteinfo"
