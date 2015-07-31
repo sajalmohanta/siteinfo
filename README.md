@@ -12,8 +12,14 @@ Installation
 
 Download into `sites/all/modules` and install.
 
+How To Configure
+-------------------------
+Go to admin/config/system/site-information.
+Enter Site Api Key.
+
 How To Use
 -------------------------
 
 
 * Go to <Site Domain>/page_json/<Api key>/<node id> to see the endpoint.
+
